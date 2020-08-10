@@ -20,7 +20,7 @@ with open('/etc/hatchan/bright.txt') as f:
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-def colorWipe(strip, color, wait_ms=50):
+def colorWipe(strip, color, wait_ms=5):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
@@ -137,6 +137,9 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
+        # Make sure all Pixels have been set to a value
+        colorWipe(strip, Color(0,0,0), 10)
+
         pinwheels = [
             PinWheel(pixels, 64, 39, 3, 0, (255,0,0), 150, False),
             PinWheel(pixels, 0, 63, 4, 2, (0,255,0), 75, True),
