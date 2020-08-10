@@ -28,6 +28,7 @@ def colorWipe(strip, color, wait_ms=5):
         time.sleep(wait_ms/1000.0)
 
 class PinWheel():
+    pixel_colors = [(0,0,0) for i in range(LED_COUNT)]
     # Pixels - the NeoPixel String Object
     # start_pixel - Pixel index to start at; should be lowest index you want, regardless of reverse.
     # length - Length of the pinwheel (pinwheel range will be from start_pixel to start_pixel+length-1)
@@ -73,16 +74,20 @@ class PinWheel():
     def map_pixel(self, index):
         return index + self.start
 
+    def write_pixel(self, position, color):
+        PinWheel.pixel_colors[position] = color
+        self.pixels.setPixelColor(position, Color(*color))
+
     def clear_pixels(self):
         if self.last_points is not None:
             for point in self.last_points:
-                self.pixels.setPixelColor(self.map_pixel(point), Color(0,0,0))
+                self.write_pixel(self.map_pixel(point), (0,0,0))
 
     def draw_pixels(self):
         if self.last_points is not None:
             for point in self.last_points:
-                pixel_color = self.or_colors(self.pixels.getPixelColor(self.map_pixel(point)), self.color)
-                self.pixels.setPixelColor(self.map_pixel(point), Color(*pixel_color))
+                pixel_color = self.or_colors(PinWheel.pixel_colors[self.map_pixel(point)], self.color)
+                self.write_pixel(self.map_pixel(point), pixel_color)
     
     def calc_pixels(self):
         curr_time = self.get_time()
