@@ -72,7 +72,7 @@ class PinWheel():
     # (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
     # DERP... ranges will always be same length, so its just a shift
     def map_pixel(self, index):
-        return index + self.start
+        return int(index + self.start)
 
     def write_pixel(self, position, color):
         PinWheel.pixel_colors[position] = color
@@ -103,7 +103,7 @@ class PinWheel():
 
         points = []
         for spoke in range(self.spokes):
-            spoke_point = round(spoke * self.spoke_spacing + curr_point) % self.length
+            spoke_point = int(round(spoke * self.spoke_spacing + curr_point) % self.length)
 
             trail_points = []
             for trail_point in range(self.trail+1):
