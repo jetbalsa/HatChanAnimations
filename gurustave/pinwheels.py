@@ -144,9 +144,9 @@ if __name__ == '__main__':
         ]
         while True:
             # Need to clear the pixels seperatly for the color blending to work
-            for pinwheel in pin_wheels:
+            for pinwheel in pinwheels:
                 pinwheel.clear_pixels()
-            for pinwheel in pin_wheels:
+            for pinwheel in pinwheels:
                 pinwheel.calc_pixels()
             pixels.show()
             time.sleep(5/1000.0)
