@@ -138,9 +138,9 @@ if __name__ == '__main__':
 
     try:
         pinwheels = [
-            PinWheel(pixels, 52, 51, 3, 0, (255,0,0), 150, False),
-            PinWheel(pixels, 0, 52, 4, 1, (0,255,0), 75, True),
-            PinWheel(pixels, 0, 103, 4, 2, (0,0,255), 100, True)
+            PinWheel(pixels, 64, 39, 3, 0, (255,0,0), 150, False),
+            PinWheel(pixels, 0, 63, 4, 2, (0,255,0), 75, True),
+            PinWheel(pixels, 0, 103, 4, 3, (0,0,255), 100, True)
         ]
         while True:
             # Need to clear the pixels seperatly for the color blending to work
